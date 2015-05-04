@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Created by Leo: http://leoeditor.com/leo_toc.html -->
+<!-- Created by Leo (http://webpages.charter.net/edreamleo/front.html) -->
 <?xml-stylesheet ekr_test ?>
-<leo_file xmlns:leo="http://leoeditor.com/namespaces/leo-python-editor/1.1" >
+<leo_file xmlns:leo="http://www.leo-editor.org/2011/leo" >
 <leo_header file_format="2" tnodes="0" max_tnode_index="0" clone_windows="0"/>
 <globals body_outline_ratio="0.5" body_secondary_ratio="0.5">
 	<global_window_position top="50" left="50" height="500" width="700"/>
@@ -32,7 +32,9 @@
 <v t="2014fall.20141212095015.1777" a="E"><vh>class Midterm</vh>
 <v t="amd.20150503182609.1"><vh>__init__</vh></v>
 <v t="amd.20150503173602.1"><vh>index</vh></v>
-<v t="amd.20150503183542.1"><vh>spur</vh></v>
+<v t="amd.20150503183542.1"><vh>index2</vh></v>
+<v t="2015.20150504155510.1654"><vh>index3</vh></v>
+<v t="2015.20150504155510.1652"><vh>spur</vh></v>
 <v t="amd.20150503183546.1"><vh>spuraction</vh></v>
 <v t="amd.20150503185058.1"><vh>drawspur</vh></v>
 <v t="amd.20150503185210.1"><vh>drawspuraction</vh></v>
@@ -267,6 +269,54 @@ QLineEdit#editorLabel {
 <t tx="2014fall.20141212095015.1786">horizontal: body pane to the left
 vertical: body pane on the botton</t>
 <t tx="2015.20150330144929.1714"></t>
+<t tx="2015.20150504155510.1652">@cherrypy.expose
+# N 為齒數, M 為模數, P 為壓力角
+def spur2(self, N=20, M=5, P=15):
+    outstring = '''
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+&lt;!-- 載入 brython.js --&gt;
+&lt;script type="text/javascript" src="/static/Brython3.1.1-20150328-091302/brython.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;!-- 啟動 brython() --&gt;
+&lt;body onload="brython()"&gt;
+    
+&lt;form method=POST action=spuraction&gt;
+齒數:&lt;input type=text name=N value='''+str(N)+'''&gt;&lt;br /&gt;
+模數:&lt;input type=text name=M value = '''+str(M)+'''&gt;&lt;br /&gt;
+壓力角:&lt;input type=text name=P value = '''+str(P)+'''&gt;&lt;br /&gt;
+&lt;input type=submit value=send&gt;
+&lt;/form&gt;
+&lt;br /&gt;&lt;a href="index"&gt;index&lt;/a&gt;&lt;br /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+'''
+
+    return outstring</t>
+<t tx="2015.20150504155510.1654">@cherrypy.expose
+# N 為齒數, M 為模數, P 為壓力角
+def index3(self,  A=None, B=None):
+    output = '''
+    &lt;!doctype html&gt;&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+    &lt;title&gt;2015CD Midterm&lt;/title&gt;
+    &lt;/head&gt; 
+    &lt;body&gt;
+    '''
+    output += "學號為"+str(A)+"&lt;br /&gt;"
+    output += "姓名為"+str(B)+"&lt;br /&gt;"
+    output +='''&lt;br /&gt;&lt;a href="/index2"&gt;index2&lt;/a&gt;(按下後再輸入)&lt;br /&gt;'''
+    output +='''&lt;br /&gt;&lt;a href="index"&gt;index&lt;/a&gt;&lt;br /&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    '''
+    
+    return output
+    
+    </t>
 <t tx="amd.20150503172957.1"></t>
 <t tx="amd.20150503173008.1"># coding=utf-8
 # 上面的程式內容編碼必須在程式的第一或者第二行才會有作用
@@ -1747,7 +1797,8 @@ def index(self):
     &lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
     &lt;/head&gt;
     &lt;body&gt;
-    &lt;a href="spur"&gt;spur&lt;/a&gt;&lt;br /&gt;
+    &lt;a href="spur"&gt;index2&lt;/a&gt;&lt;br /&gt;
+    &lt;a href="spur"&gt;spur2&lt;/a&gt;&lt;br /&gt;
     &lt;a href="drawspur"&gt;drawspur&lt;/a&gt;&lt;br /&gt;
     &lt;/body&gt;
     &lt;/html&gt;
@@ -1795,7 +1846,7 @@ http://2015cdmidterm-scrum2mdetw.rhcloud.com/</t>
 <t tx="amd.20150503183108.1"></t>
 <t tx="amd.20150503183542.1">@cherrypy.expose
 # N 為齒數, M 為模數, P 為壓力角
-def spur(self, N=20, M=5, P=15):
+def index2(self, A=None, B=None):
     outstring = '''
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt;
@@ -1808,9 +1859,9 @@ def spur(self, N=20, M=5, P=15):
 &lt;body onload="brython()"&gt;
     
 &lt;form method=POST action=spuraction&gt;
-齒數:&lt;input type=text name=N value='''+str(N)+'''&gt;&lt;br /&gt;
-模數:&lt;input type=text name=M value = '''+str(M)+'''&gt;&lt;br /&gt;
-壓力角:&lt;input type=text name=P value = '''+str(P)+'''&gt;&lt;br /&gt;
+學號:&lt;input type=text name=N value='''+str(A)+'''&gt;&lt;br /&gt;
+姓名:&lt;input type=text name=M value = '''+str(B)+'''&gt;&lt;br /&gt;
+
 &lt;input type=submit value=send&gt;
 &lt;/form&gt;
 &lt;br /&gt;&lt;a href="index"&gt;index&lt;/a&gt;&lt;br /&gt;
@@ -1833,7 +1884,7 @@ def spuraction(self, N=20, M=5, P=15):
     output += "齒數為"+str(N)+"&lt;br /&gt;"
     output += "模數為"+str(M)+"&lt;br /&gt;"
     output += "壓力角為"+str(P)+"&lt;br /&gt;"
-    output +='''&lt;br /&gt;&lt;a href="/spur"&gt;spur&lt;/a&gt;(按下後再輸入)&lt;br /&gt;'''
+    output +='''&lt;br /&gt;&lt;a href="/spur2"&gt;spur2&lt;/a&gt;(按下後再輸入)&lt;br /&gt;'''
     output +='''&lt;br /&gt;&lt;a href="index"&gt;index&lt;/a&gt;&lt;br /&gt;
     &lt;/body&gt;
     &lt;/html&gt;
